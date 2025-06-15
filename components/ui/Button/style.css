@@ -1,0 +1,70 @@
+/* Commons */
+.button {
+  display: inline-flex;
+  padding: 12px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 12px;
+  font-family: "Manrope";
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  position: relative;
+  border: none;
+}
+
+/* Primary */
+.button {
+  background: var(--color-custom-blue-700);
+  color: white;
+}
+
+.button::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 14px;
+  background: linear-gradient(
+    135deg,
+    var(--color-custom-blue-800) 0%,
+    color-mix(in oklch, var(--color-custom-blue-600) 50%, transparent) 35%,
+    color-mix(in oklch, var(--color-custom-blue-600) 50%, transparent) 65%,
+    var(--color-custom-blue-800) 100%
+  );
+  z-index: -1;
+}
+
+.button:hover {
+  background: white;
+  color: var(--color-custom-blue-600);
+}
+
+.button:hover::before {
+  background: var(--color-custom-blue-600);
+}
+
+/* Secondary */
+.button-secondary {
+  background: white;
+  color: var(--color-custom-blue-600);
+}
+
+.button-secondary:hover {
+  background: var(--color-custom-blue-800);
+  color: white;
+}
+
+.button-secondary::before {
+  background: linear-gradient(
+    135deg,
+    rgb(255, 255, 255) 0%,
+    color-mix(in oklch, var(--color-custom-blue-600) 50%, transparent) 35%,
+    color-mix(in oklch, var(--color-custom-blue-600) 50%, transparent) 65%,
+    rgb(255, 255, 255) 100%
+  );
+}
+
+.button-secondary:hover::before {
+  background: var(--color-custom-blue-800);
+}

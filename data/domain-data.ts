@@ -1,0 +1,16 @@
+export const domains = [
+  "Dev",
+  "IA",
+  "Cloud",
+  "Data",
+  "Management",
+  "UX/UI",
+  "Design",
+  "Bureautique",
+  "Marketing",
+  "IOT",
+  "Réseaux",
+  "CRM",
+  "Blockchain",
+  "DevOps",
+];

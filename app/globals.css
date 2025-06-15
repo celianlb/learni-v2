@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+body {
+  overflow-x: hidden;
+}
+
+@layer theme {
+  :root {
+    --background: #ffffff;
+    --foreground: #171717;
+
+    /* Custom Blue Colors */
+    --color-custom-blue-900: #090522;
+    --color-custom-blue-800: #090240;
+    --color-custom-blue-700: #120a4e;
+    --color-custom-blue-600: #2a17b4;
+    --color-custom-blue-500: #65edff;
+  }
+}
+
+@layer utilities {
+  .font-work-sans {
+    font-family: var(--font-work-sans);
+  }
+
+  .font-manrope {
+    font-family: var(--font-manrope);
+  }
+
+  /* Custom Blue Utilities */
+  .bg-custom-blue-900 {
+    background-color: var(--color-custom-blue-900);
+  }
+  .bg-custom-blue-800 {
+    background-color: var(--color-custom-blue-800);
+  }
+  .bg-custom-blue-700 {
+    background-color: var(--color-custom-blue-700);
+  }
+  .bg-custom-blue-600 {
+    background-color: var(--color-custom-blue-600);
+  }
+  .bg-custom-blue-500 {
+    background-color: var(--color-custom-blue-500);
+  }
+
+  .text-custom-blue-900 {
+    color: var(--color-custom-blue-900);
+  }
+  .text-custom-blue-800 {
+    color: var(--color-custom-blue-800);
+  }
+  .text-custom-blue-700 {
+    color: var(--color-custom-blue-700);
+  }
+  .text-custom-blue-600 {
+    color: var(--color-custom-blue-600);
+  }
+  .text-custom-blue-500 {
+    color: var(--color-custom-blue-500);
+  }
+}
