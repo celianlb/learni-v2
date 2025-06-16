@@ -10,7 +10,7 @@ export default async function SectionAllFormations() {
     const categories = await getAllCategories();
 
     const formationsByCategory = await Promise.all(
-      categories.map(async (category) => {
+      categories.map(async (category: { slug: string }) => {
         const formations = await getFormationByCategory(category.slug);
         return { category: category.slug, formations };
       })
