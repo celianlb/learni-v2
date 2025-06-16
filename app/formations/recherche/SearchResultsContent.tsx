@@ -3,6 +3,7 @@ import Button from "@/components/ui/Button/Button";
 import Input from "@/components/ui/Input/Input";
 import { useFilterFormationStore } from "@/store/filterFormationStore";
 import { FormationWithRelations } from "@/types/formation";
+import { Tag } from "@prisma/client";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import FilterFormation from "../Formation/Filter/filter-formation";
@@ -72,7 +73,7 @@ export default function SearchResultsContent() {
     // Filtre tags
     if (appliedFilters.tags.length > 0) {
       filtered = filtered.filter((f) =>
-        f.tags.some((tag) => appliedFilters.tags.includes(tag.name))
+        f.tags.some((tag: Tag) => appliedFilters.tags.includes(tag.name))
       );
     }
 
