@@ -21,7 +21,7 @@ export default function FAQ({ items }: FAQProps) {
   };
 
   return (
-    <section className="flex items-center gap-16 justify-between mt-48">
+    <section className="flex items-center gap-16 justify-between mt-32 md:mt-48">
       <Image
         width={270}
         height={298}
@@ -44,7 +44,7 @@ export default function FAQ({ items }: FAQProps) {
               }`}
             >
               <span
-                className={`text-left font-medium ${
+                className={`text-left font-work-sans text-[16px] font-medium tracking-tight ${
                   openIndex === index ? "text-blue-900" : ""
                 }`}
               >
@@ -67,7 +67,7 @@ export default function FAQ({ items }: FAQProps) {
                   transition={{ duration: 0.3 }}
                   className="overflow-hidden"
                 >
-                  <div className="p-4 mt-2 bg-white rounded-lg">
+                  <div className="p-4 mt-2 bg-white rounded-lg font-work-sans text-[16px] tracking-tight">
                     {item.answer}
                   </div>
                 </motion.div>

@@ -2,21 +2,25 @@ import Image from "next/image";
 import Button from "../ui/Button/Button";
 export default function Services() {
   return (
-    <section className="flex flex-col gap-24 mt-48">
-      <h2 className=" font-manrope text-[32px] leading-tight">
+    <section className="flex flex-col gap-16 md:gap-24 mt-28 md:mt-48">
+      <h2 className=" font-manrope text-[28px] md:text-[32px] leading-tight">
         Ce qu&apos;on propose chez{" "}
         <span className="font-extrabold">Learni</span>
       </h2>
-      <div className="flex gap-16  mb-24">
+      <div className="flex flex-col md:flex-row gap-16  mb-12 md:mb-24">
+        <h3 className="font-work-sans block md:hidden text-[20px] md:text-[24px] font-semibold leading-tight">
+          Des intervenants qualifiés et professionels
+        </h3>
         <Image
           src="/home/intervenants.svg"
           alt="Services"
+          className="w-full md:w-1/2"
           width={675}
           height={635}
         />
         <div className="flex flex-col justify-between gap-8">
           <div className="flex flex-col gap-6">
-            <h3 className="font-work-sans text-[24px] font-semibold leading-tight">
+            <h3 className="font-work-sans hidden md:block text-[20px] md:text-[24px] font-semibold leading-tight">
               Des intervenants qualifiés et professionels
             </h3>
             <p className="font-manrope text-[16px] leading-6 text-custom-blue-900 opacity-80">
@@ -42,10 +46,10 @@ export default function Services() {
           </div>
         </div>
       </div>
-      <div className="flex gap-16 mb-24">
+      <div className="flex flex-col md:flex-row gap-16 mb-24">
         <div className="flex flex-col justify-between gap-8">
           <div className="flex flex-col gap-6">
-            <h3 className="font-work-sans text-[24px] font-semibold leading-tight">
+            <h3 className="font-work-sans text-[20px] md:text-[24px] font-semibold leading-tight">
               Des formations professionnalisantes aux tendances du marché
             </h3>
             <p className="font-manrope text-[16px] leading-6 text-custom-blue-900 opacity-70">
@@ -58,17 +62,25 @@ export default function Services() {
               compétences de vos équipes ou de répondre à de nouveaux enjeux,
               nous mettons <b>l’expertise au service de votre performance</b>.
             </p>
-            <Button variant="secondary" className="w-fit">
-              Découvrir nos formations
-            </Button>
+            <div className="hidden md:block">
+              <Button variant="secondary" className="w-fit">
+                Découvrir nos formations
+              </Button>
+            </div>
           </div>
         </div>
         <Image
           src="/home/formations.svg"
           alt="Services"
+          className="w-full md:w-1/2"
           width={675}
           height={635}
         />
+        <div className="block md:hidden">
+          <Button variant="secondary" className="w-fit">
+            Découvrir nos formations
+          </Button>
+        </div>
       </div>
     </section>
   );

@@ -27,7 +27,7 @@ export default function Button({
       onClick={onClick}
       disabled={disabled}
       className={cn(
-        "button",
+        "button cursor-pointer",
         variant === "secondary" && "button-secondary",
         className
       )}

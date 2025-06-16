@@ -1,8 +1,8 @@
 import Intervention from "@/components/CTA/Intervention/Intervention";
 import FAQ from "@/components/FAQ";
-import Footer from "@/components/Footer";
 import Services from "@/components/Services";
 import More from "@/components/Services/More";
+import Testimonials from "@/components/Testimonials";
 import { TimelineSection } from "@/components/Timeline";
 import PartnersSection from "@/components/ui/Partners/PartnersSection";
 import SectionTag from "@/components/ui/section-tag";
@@ -41,10 +41,10 @@ export default function Home() {
       </div>
       <Services />
       <More />
+      <Testimonials />
       <TimelineSection />
       <Intervention />
       <FAQ items={data} />
-      <Footer />
     </main>
   );
 }

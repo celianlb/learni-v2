@@ -1,30 +1,11 @@
 import { create } from "zustand";
 
-const LEVELS = [
-  "debutant",
-  "initiation",
-  "intermediaire",
-  "avance",
-  "expert",
-  "tous publics",
-];
-
-const TAGS = [
-  "IA",
-  "ChatGPT",
-  "Back-End",
-  "Python",
-  "JavaScript",
-  "Montage",
-  "Data",
-  "Front-End",
-  "No-Code",
-  "Design",
-];
-
 export type Filters = {
-  levels: string[];
+  categories: string[];
   tags: string[];
+  levels: string[];
+  durations: string[];
+  formats: string[];
   budget: [number, number];
 };
 
@@ -37,8 +18,11 @@ interface FilterFormationStore {
 }
 
 const defaultFilters: Filters = {
-  levels: [],
+  categories: [],
   tags: [],
+  levels: [],
+  durations: [],
+  formats: [],
   budget: [0, 5000],
 };
 
@@ -59,5 +43,3 @@ export const useFilterFormationStore = create<FilterFormationStore>((set) => ({
       appliedFilters: { ...defaultFilters },
     })),
 }));
-
-export { LEVELS, TAGS };

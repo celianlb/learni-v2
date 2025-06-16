@@ -19,11 +19,11 @@ export default function DesktopHeader() {
   }, []);
 
   return (
-    <div className="fixed z-50 top-0 left-0 right-0 rounded-4xl  py-4 px-10 md:px-24 2xl:px-[20%]">
+    <div className="fixed z-50 top-0 left-0 right-0 rounded-4xl py-4 px-10 md:px-24 2xl:px-[15%]">
       <header
-        className={`transition-all  duration-300 rounded-3xl ${
+        className={`transition-all  duration-300 border-[1px] border-blue-900/0 rounded-3xl ${
           isScrolled
-            ? "bg-white/70 mt-3 p-4 backdrop-blur-md shadow-sm"
+            ? "bg-white/70 mt-3 p-4 backdrop-blur-md shadow-sm border-[1px] border-blue-900/30"
             : "bg-transparent"
         }`}
       >

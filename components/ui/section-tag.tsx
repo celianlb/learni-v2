@@ -4,7 +4,7 @@ const tags = [
   { number: "4", libelle: "ans sur le terrain" },
   { number: "99", libelle: "% de satisfaction" },
   { number: "5000", libelle: "apprenants formés" },
-  { number: "800", libelle: "formations proposées" },
+  { number: "2000", libelle: "formations proposées" },
 ];
 
 export default async function TagSection() {

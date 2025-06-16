@@ -2,7 +2,7 @@ import Button from "@/components/ui/Button/Button";
 
 export default function HeroSection() {
   return (
-    <section className="relative mt-16">
+    <section className="relative mt-0 md:mt-16">
       <div className="absolute inset-0 bg-gradient-to-br from-blue-200/10 via-blue-400/10 to-blue-200/10 blur-3xl -z-10" />
       <div className="flex flex-col relative gap-8 justify-between items-center py-[140px] max-w-[800px] mx-auto">
         <h1 className="font-manrope text-custom-blue-900 font-black text-[32px] md:text-[48px] tracking-tight flex flex-col items-center">

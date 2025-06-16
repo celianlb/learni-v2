@@ -79,9 +79,11 @@ function DomainInfiniteSlider({
             key={index}
             backgroundType="blue"
             borderType="gradient"
-            className="domain-card flex-shrink-0 p-8 md:p-8 lg:p-4 w-[150px] rounded-sm flex items-center justify-center"
+            className="domain-card flex-shrink-0 p-4 md:p-4 lg:p-4 w-[150px] rounded-sm flex items-center justify-center"
           >
-            <span className="text-white text-lg font-medium">{item}</span>
+            <span className="text-white font-work-sans font-normal text-[16px] leading-6 tracking-tight">
+              {item}
+            </span>
           </Card>
         ))}
       </div>

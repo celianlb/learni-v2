@@ -1,0 +1,157 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL_UNPOOLED")
+}
+
+model Formation {
+  id              Int         @id @default(autoincrement())
+  slug            String      @unique
+  titre           String
+  duree           String
+  format          String
+  participantsMax Int
+  niveau          String
+  langue          String
+  public          String
+  prerequis       String
+  objectifs       String[]
+  tarifIndividuel String
+  tarifCollectif  String?
+  evaluation      String[]
+  apprentissage   String[]
+  accompagnement  String
+  categoryId      Int?
+  code            String      @unique
+  category        Category?   @relation(fields: [categoryId], references: [id])
+  programme       Programme[]
+  tags            Tag[]       @relation("FormationToTag")
+
+  @@index([titre], map: "index_titre")
+}
+
+model Programme {
+  id          Int       @id @default(autoincrement())
+  jour        Int
+  titre       String
+  contenu     String
+  formationId Int
+  formation   Formation @relation(fields: [formationId], references: [id])
+}
+
+model Category {
+  id         Int         @id @default(autoincrement())
+  name       String      @unique
+  slug       String      @unique
+  formations Formation[]
+  tags       Tag[]
+}
+
+model Tag {
+  id         Int         @id @default(autoincrement())
+  name       String
+  categoryId Int
+  category   Category    @relation(fields: [categoryId], references: [id])
+  formations Formation[] @relation("FormationToTag")
+
+  @@unique([name, categoryId])
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+model Article {
+  id                      String                    @id
+  titre                   String
+  slug                    String                    @unique
+  description             String
+  auteurId                String
+  date_publication        DateTime
+  temps_lecture           Int
+  extrait_texte           String
+  datePublished           DateTime
+  metaId                  String                    @unique
+  statut                  String                    @default("ko")
+  AuteurArticle           AuteurArticle             @relation(fields: [auteurId], references: [id])
+  MetaArticle             MetaArticle               @relation(fields: [metaId], references: [id])
+  ContenuStructureArticle ContenuStructureArticle[]
+  CategoryArticle         CategoryArticle[]         @relation("ArticleCategories")
+  TagArticle              TagArticle[]              @relation("ArticleTags")
+}
+
+model AuteurArticle {
+  id      String    @id
+  nom     String
+  email   String    @unique
+  bio     String
+  Article Article[]
+}
+
+model CategoryArticle {
+  id      String    @id
+  nom     String    @unique
+  Article Article[] @relation("ArticleCategories")
+}
+
+model ContenuStructureArticle {
+  id          String             @id
+  type        ContenuTypeArticle
+  balise      String?
+  content     String?
+  listType    String?
+  articleId   String
+  Article     Article            @relation(fields: [articleId], references: [id])
+  ItemArticle ItemArticle[]
+}
+
+model ItemArticle {
+  id                      String                  @id
+  value                   String
+  structureId             String
+  ContenuStructureArticle ContenuStructureArticle @relation(fields: [structureId], references: [id])
+}
+
+model MetaArticle {
+  id              String   @id
+  titre_seo       String
+  description_seo String
+  keywords        String
+  robots          String
+  Article         Article?
+}
+
+model TagArticle {
+  id      String    @id
+  nom     String    @unique
+  Article Article[] @relation("ArticleTags")
+}
+
+enum ContenuTypeArticle {
+  text
+  list
+}

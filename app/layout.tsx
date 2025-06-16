@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import Header from "@/components/Header/Header";
 import type { Metadata } from "next";
 import { Manrope, Work_Sans } from "next/font/google";
@@ -26,10 +27,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${workSans.variable} ${manrope.variable} antialiased px-10 md:px-24 2xl:px-[20%] overflow-x-hidden`}
+        className={`${workSans.variable} ${manrope.variable} antialiased px-10 md:px-24 2xl:px-[15%] overflow-x-hidden`}
       >
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );

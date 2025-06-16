@@ -28,8 +28,11 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
   const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
 
   return (
-    <section className="w-full bg-white font-sans mt-48" ref={containerRef}>
-      <h2 className=" font-manrope text-[32px] leading-tight">
+    <section
+      className="w-full bg-white font-sans mt-32 md:mt-48"
+      ref={containerRef}
+    >
+      <h2 className=" font-manrope text-[28px] md:text-[32px] mb-12 md:mb-0 leading-tight">
         L&apos;historique de
         <span className="font-extrabold"> Learni</span>
       </h2>

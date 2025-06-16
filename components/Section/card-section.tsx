@@ -9,7 +9,7 @@ export default function CardSection({
 }) {
   return (
     <section
-      className={`p-6 lg:p-16 relative z-10 bg-white rounded-3xl md:rounded-[42px] shadow-[inset_0px_0px_6px_0px_rgba(18,10,78,0.2)] outline-offset-[-2px] ${className}`}
+      className={`p-6 lg:p-16 relative z-10 border-[1px] border-blue-900 bg-white rounded-3xl md:rounded-[32px] shadow-[0px_0px_6px_0px_rgba(18,10,78,0.2)]  ${className}`}
       ref={ref}
     >
       {children}

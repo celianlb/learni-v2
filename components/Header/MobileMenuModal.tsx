@@ -8,11 +8,13 @@ import Nav from "./Nav";
 interface MobileMenuModalProps {
   open: boolean;
   onClose: () => void;
+  isScrolled: boolean;
 }
 
 export default function MobileMenuModal({
   open,
   onClose,
+  isScrolled,
 }: MobileMenuModalProps) {
   const [show, setShow] = useState(open);
   const [animClass, setAnimClass] = useState("");
@@ -47,7 +49,9 @@ export default function MobileMenuModal({
       />
       {/* Menu sous la navbar */}
       <div
-        className={`fixed left-0 right-0 top-[70px] z-50 bg-white rounded-b-2xl shadow-lg mx-5 flex flex-col items-start p-10 ${animClass}`}
+        className={`fixed left-0 right-0 top-[110px] z-50 rounded-2xl shadow-lg mx-5 flex flex-col items-start p-10 ${animClass} ${
+          isScrolled ? "bg-white/70 backdrop-blur-md " : "bg-white"
+        }`}
       >
         <div className="mb-8 w-full flex flex-col items-start">
           <Nav variant="mobile" />
