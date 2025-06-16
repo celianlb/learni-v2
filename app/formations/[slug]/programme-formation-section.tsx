@@ -32,7 +32,7 @@ export default async function ProgrammeFormationSection({
     objectives: formation.objectifs || [],
     programme:
       formation.programme?.map(
-        (day: { titre: string; contenu: string }, index) => ({
+        (day: { titre: string; contenu: string }, index: number) => ({
           day: index + 1,
           title: day.titre || `Jour ${index + 1}`,
           content: day.contenu.split("\n").filter(Boolean), // Convertir le contenu en tableau de strings
