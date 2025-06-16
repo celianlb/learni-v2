@@ -64,7 +64,12 @@ export default async function SuggestedFormation({
       ...formation,
       similarityScore: calculateSimilarity(currentFormation, formation),
     }))
-    .sort((a, b) => b.similarityScore - a.similarityScore) // Trier par score de similarité
+    .sort(
+      (
+        a: FormationWithRelations & { similarityScore: number },
+        b: FormationWithRelations & { similarityScore: number }
+      ) => b.similarityScore - a.similarityScore
+    ) // Trier par score de similarité
     .slice(0, 4); // Prendre les 4 plus similaires
 
   if (suggestedFormations.length === 0) {
