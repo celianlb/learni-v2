@@ -45,11 +45,13 @@ export default async function SectionAllFormations() {
                     {category.name}
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pb-4">
-                    {categoryFormations.slice(0, 4).map((formation) => (
-                      <div key={formation.slug}>
-                        <FormationCard formation={formation} />
-                      </div>
-                    ))}
+                    {categoryFormations
+                      .slice(0, 4)
+                      .map((formation: FormationWithRelations) => (
+                        <div key={formation.slug}>
+                          <FormationCard formation={formation} />
+                        </div>
+                      ))}
                   </div>
                   <div className="flex items-center justify-end gap-2 group w-full">
                     <Link
