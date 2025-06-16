@@ -10,8 +10,9 @@ export default async function CategoryPage({
   params: Promise<{ slug: string }>;
 }) {
   const categories = await getAllCategories();
+  const slug = (await params).slug;
   const category = categories.find(
-    async (cat) => cat.slug === (await params).slug
+    (cat: { id: number; name: string; slug: string }) => cat.slug === slug
   );
 
   if (!category) {
