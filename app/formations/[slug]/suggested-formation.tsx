@@ -29,8 +29,8 @@ export default async function SuggestedFormation({
     let score = 0;
 
     // Vérifier les tags communs
-    const commonTags = formation1.tags.filter((tag) =>
-      formation2.tags.some((t) => t.name === tag.name)
+    const commonTags = formation1.tags.filter((tag: { name: string }) =>
+      formation2.tags.some((t: { name: string }) => t.name === tag.name)
     );
     score += commonTags.length * 2;
 
