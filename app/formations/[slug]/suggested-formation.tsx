@@ -13,7 +13,9 @@ export default async function SuggestedFormation({
   const formations = await getAllFormations();
 
   // Trouver la formation actuelle
-  const currentFormation = formations.find((f) => f.slug === currentSlug);
+  const currentFormation = formations.find(
+    (f: FormationWithRelations) => f.slug === currentSlug
+  );
 
   if (!currentFormation) {
     return null;
@@ -57,8 +59,8 @@ export default async function SuggestedFormation({
 
   // Trouver les formations similaires
   const suggestedFormations = formations
-    .filter((f) => f.slug !== currentSlug) // Exclure la formation actuelle
-    .map((formation) => ({
+    .filter((f: FormationWithRelations) => f.slug !== currentSlug) // Exclure la formation actuelle
+    .map((formation: FormationWithRelations) => ({
       ...formation,
       similarityScore: calculateSimilarity(currentFormation, formation),
     }))
@@ -75,13 +77,15 @@ export default async function SuggestedFormation({
         Ces formations pourraient vous plaire
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {suggestedFormations.map((formation) => (
-          <FormationCard
-            key={formation.slug}
-            formation={formation}
-            variant="default"
-          />
-        ))}
+        {suggestedFormations.map(
+          (formation: FormationWithRelations & { similarityScore: number }) => (
+            <FormationCard
+              key={formation.slug}
+              formation={formation}
+              variant="default"
+            />
+          )
+        )}
       </div>
     </section>
   );
