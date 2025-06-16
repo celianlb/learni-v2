@@ -19,7 +19,10 @@ export default async function SectionAllFormations() {
     const formationsMap = formationsByCategory.reduce(
       (
         acc: { [key: string]: FormationWithRelations[] },
-        { category, formations }
+        {
+          category,
+          formations,
+        }: { category: string; formations: FormationWithRelations[] }
       ) => {
         acc[category] = formations;
         return acc;
