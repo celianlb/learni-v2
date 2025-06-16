@@ -3,10 +3,10 @@ import Button from "@/components/ui/Button/Button";
 import Input from "@/components/ui/Input/Input";
 import { useFilterFormationStore } from "@/store/filterFormationStore";
 import { FormationWithRelations } from "@/types/formation";
-import { Tag } from "@prisma/client";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import FilterFormation from "../Formation/Filter/filter-formation";
+import { Tag } from "../Formation/Filter/types";
 import FormationCard from "../Formation/formation-card";
 import FormationCardSkeleton from "../Formation/formation-card-skeleton";
 

@@ -9,21 +9,10 @@ import {
 import React, { useEffect, useRef, useState } from "react";
 import { useFilterFormationStore } from "../../../../store/filterFormationStore";
 import { BudgetDoubleSlider } from "./budget-double-slider";
+import { Category, Tag } from "./types";
 
 type FilterFormationProps = {
   onValidate?: () => void;
-};
-
-type Category = {
-  id: number;
-  name: string;
-  slug: string;
-};
-
-type Tag = {
-  id: number;
-  name: string;
-  categoryId: number;
 };
 
 const FilterFormation: React.FC<FilterFormationProps> = () => {
