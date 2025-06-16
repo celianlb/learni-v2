@@ -13,7 +13,7 @@ export async function GET() {
       },
     });
 
-    const tagNames = tags.map((tag) => tag.name);
+    const tagNames = tags.map((tag: { name: string }) => tag.name);
 
     return NextResponse.json(tagNames);
   } catch (error) {
