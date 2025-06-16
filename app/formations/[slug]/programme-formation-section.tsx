@@ -31,11 +31,13 @@ export default async function ProgrammeFormationSection({
   const formationProgramme: FormationProgramme = {
     objectives: formation.objectifs || [],
     programme:
-      formation.programme?.map((day, index) => ({
-        day: index + 1,
-        title: day.titre || `Jour ${index + 1}`,
-        content: day.contenu.split("\n").filter(Boolean), // Convertir le contenu en tableau de strings
-      })) || [],
+      formation.programme?.map(
+        (day: { titre: string; contenu: string }, index) => ({
+          day: index + 1,
+          title: day.titre || `Jour ${index + 1}`,
+          content: day.contenu.split("\n").filter(Boolean), // Convertir le contenu en tableau de strings
+        })
+      ) || [],
     evaluationMethods: formation.evaluation || [],
     learningMethods: formation.apprentissage || [],
   };
