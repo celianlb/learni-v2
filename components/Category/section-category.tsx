@@ -3,9 +3,15 @@ import Image from "next/image";
 import Link from "next/link";
 import AllCategory from "./all-category";
 
+interface Category {
+  id: number;
+  name: string;
+  slug: string;
+}
+
 export default async function CategorySection() {
   const categoriesData = await getAllCategories();
-  const formattedCategories = categoriesData.map((cat) => ({
+  const formattedCategories = categoriesData.map((cat: Category) => ({
     id: cat.id,
     title: cat.name,
     slug: cat.slug,
