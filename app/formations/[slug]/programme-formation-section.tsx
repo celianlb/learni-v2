@@ -1,4 +1,4 @@
-import Card from "@/components/ui/Card/Card";
+import Card from "@/components/UI/Card/Card";
 import { getOneFormation } from "@/queries/getFormation";
 import { notFound } from "next/navigation";
 
@@ -84,7 +84,7 @@ export default async function ProgrammeFormationSection({
               {/* Bloc texte principal */}
               <div className="flex flex-col gap-8 mt-5">
                 <div className="flex flex-col md:flex-row items-baseline gap-4 ">
-                  <span className="text-[24px] font-archivo font-semibold text-custom-blue-900 leading-none">
+                  <span className="text-[24px] shrink-0 font-archivo font-semibold text-custom-blue-900 leading-none">
                     Jour {day.day}
                   </span>
                   <span className="text-[16px] font-light  font-work-sans text-custom-blue-900 lowercase">

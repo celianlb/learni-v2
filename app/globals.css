@@ -4,17 +4,20 @@ body {
   overflow-x: hidden;
 }
 
+@theme {
+  --color-custom-blue-900: #090522;
+  --color-custom-blue-800: #090240;
+  --color-custom-blue-700: #120a4e;
+  --color-custom-blue-600: #2a17b4;
+  --color-custom-blue-500: #65edff;
+}
+
 @layer theme {
   :root {
     --background: #ffffff;
     --foreground: #171717;
 
     /* Custom Blue Colors */
-    --color-custom-blue-900: #090522;
-    --color-custom-blue-800: #090240;
-    --color-custom-blue-700: #120a4e;
-    --color-custom-blue-600: #2a17b4;
-    --color-custom-blue-500: #65edff;
   }
 }
 

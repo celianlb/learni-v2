@@ -1,5 +1,6 @@
 "use client";
-import Button from "@/components/ui/Button/Button";
+
+import Button from "@/components/UI/button";
 import { globeConfig, sampleArcs } from "@/data/globe-data";
 import dynamic from "next/dynamic";
 
@@ -20,13 +21,15 @@ export function GlobeDemo({
     <div className="flex flex-row items-center justify-center relative w-full">
       <div className="  relative overflow-hidden h-[30rem] md:h-[40rem] px-4">
         <div className="flex flex-col gap-8 items-center">
-          <h2 className="text-[32px] font-manrope tracking-tight font-semibold">
+          <h2 className="text-[32px] font-manrope tracking-[-1px] font-semibold">
             {title}
           </h2>
           <p className="font-manrope text-[16px] leading-6 text-custom-blue-900 opacity-80">
             {description}
           </p>
-          <Button variant="secondary">{buttonText}</Button>
+          <Button variant="secondary" href="/contact">
+            {buttonText}
+          </Button>
         </div>
         <div className="absolute w-full bottom-0 inset-x-0 h-40 bg-gradient-to-b pointer-events-none select-none from-transparent  to-white z-40" />
         <div className="absolute w-full left-0 -bottom-20 md:-bottom-40 h-72 md:h-full -z-10">

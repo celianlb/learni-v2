@@ -1,10 +1,9 @@
 "use client";
-import Button from "@/components/ui/Button/Button";
+import Button from "@/components/UI/button";
 import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { AnimatePresence, motion } from "motion/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
-
 // Fonction pour normaliser les caractères accentués
 const normalizeString = (str: string): string => {
   return str
@@ -49,12 +48,15 @@ export default function SearchBar() {
 
   // Filtrer les tags en fonction de la saisie
   const filteredTags = useMemo(() => {
-    if (!searchQuery.trim()) return allTags;
+    if (!searchQuery.trim()) {
+      // Mélanger et limiter les tags quand il n'y a pas de recherche
+      return [...allTags].sort(() => Math.random() - 0.5).slice(0, 12);
+    }
 
     const normalizedQuery = normalizeString(searchQuery);
-    return allTags.filter((tag) =>
-      normalizeString(tag).includes(normalizedQuery)
-    );
+    return allTags
+      .filter((tag) => normalizeString(tag).includes(normalizedQuery))
+      .slice(0, 12);
   }, [searchQuery, allTags]);
 
   useEffect(() => {

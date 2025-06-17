@@ -1,7 +1,7 @@
 import AcademicCap from "../svg/academic-cap";
 import Beaker from "../svg/beaker";
 import UserGroup from "../svg/user-group";
-import CustomLink from "../ui/CustomLink";
+import CustomLink from "../UI/CustomLink";
 
 const links = [
   { label: "Les formations", href: "/formations", icon: AcademicCap },

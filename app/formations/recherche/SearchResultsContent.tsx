@@ -1,6 +1,6 @@
 "use client";
-import Button from "@/components/ui/Button/Button";
-import Input from "@/components/ui/Input/Input";
+import Button from "@/components/UI/button";
+import Input from "@/components/UI/Input/Input";
 import { useFilterFormationStore } from "@/store/filterFormationStore";
 import { FormationWithRelations } from "@/types/formation";
 import { useRouter, useSearchParams } from "next/navigation";

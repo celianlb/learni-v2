@@ -1,4 +1,4 @@
-import CardSection from "@/components/Section/card-section";
+import CardSection from "@/components/section/card-section";
 import { GlobeDemo } from "./Globe";
 
 export default function Intervention() {

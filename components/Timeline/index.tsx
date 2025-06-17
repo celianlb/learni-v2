@@ -1,6 +1,7 @@
+import Button from "@/components/UI/button";
 import Image from "next/image";
-import Button from "../ui/Button/Button";
-import { Timeline } from "./Timeline";
+import { Timeline } from "../timeline/timeline";
+
 export function TimelineSection() {
   const data = [
     {

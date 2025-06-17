@@ -1,4 +1,4 @@
-import Input from "@/components/ui/Input/Input";
+import Input from "@/components/UI/Input/Input";
 import {
   AcademicCapIcon,
   ClockIcon,

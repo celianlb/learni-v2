@@ -1,7 +1,7 @@
-import Intervention from "@/components/CTA/Intervention/Intervention";
-import FAQ from "@/components/FAQ";
+import CategorySection from "@/components/category/section-category";
+import Intervention from "@/components/cta/Intervention/Intervention";
+import FAQ from "@/components/faq";
 import { Metadata } from "next";
-import CategorySection from "../../components/Category/section-category";
 import SectionAllFormations from "./Formation/section-all-formations";
 import Top3Formations from "./Formation/section-top3-formations";
 import Hero from "./Hero";

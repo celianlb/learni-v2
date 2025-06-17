@@ -1,6 +1,6 @@
 "use client";
 
-import Card from "@/components/ui/Card/Card";
+import Card from "@/components/UI/Card/Card";
 import { useEffect, useRef, useState } from "react";
 
 import { domains } from "@/data/domain-data";

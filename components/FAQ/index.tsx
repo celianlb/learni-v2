@@ -30,7 +30,7 @@ export default function FAQ({ items }: FAQProps) {
         className="hidden md:block"
       />
       <div className="w-full mx-auto space-y-4">
-        <h2 className="text-[32px] font-semibold mb-8">
+        <h2 className="text-[32px] font-manrope tracking-[-1px] font-semibold mb-8">
           On répond à vos questions
         </h2>
         {items.map((item, index) => (

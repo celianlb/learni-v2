@@ -1,5 +1,5 @@
-import DesktopHeader from "./DesktopHeader";
-import MobileHeader from "./MobileHeader";
+import DesktopHeader from "../header/DesktopHeader";
+import MobileHeader from "../header/MobileHeader";
 
 export default function Header() {
   return (

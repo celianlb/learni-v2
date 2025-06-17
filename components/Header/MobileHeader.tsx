@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Logo from "./Logo";
-import MobileMenuModal from "./MobileMenuModal";
+import Logo from "../header/Logo";
+import MobileMenuModal from "../header/MobileMenuModal";
 
 export default function MobileHeader() {
   const [open, setOpen] = useState(false);

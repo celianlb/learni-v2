@@ -1,9 +1,9 @@
 "use client";
 
 import { sendContactForm } from "@/actions/contact";
-import CardSection from "@/components/Section/card-section";
-import Button from "@/components/ui/Button/Button";
-import Input from "@/components/ui/Input/Input";
+import CardSection from "@/components/section/card-section";
+import Button from "@/components/UI/button";
+import Input from "@/components/UI/Input/Input";
 import { contactFormSchema, type ContactFormData } from "@/schemas/contact";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams } from "next/navigation";

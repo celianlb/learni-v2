@@ -1,7 +1,8 @@
-import Button from "@/components/ui/Button/Button";
-import Card from "@/components/ui/Card/Card";
+import Button from "@/components/UI/button";
+import Card from "@/components/UI/Card/Card";
 import Image from "next/image";
-import DomainSlider from "./DomainSlider";
+import DomainSlider from "../More/domain-slider";
+
 export default function More() {
   return (
     <section>

@@ -1,12 +1,12 @@
-import Intervention from "@/components/CTA/Intervention/Intervention";
-import FAQ from "@/components/FAQ";
-import Services from "@/components/Services";
-import More from "@/components/Services/More";
-import Testimonials from "@/components/Testimonials";
-import { TimelineSection } from "@/components/Timeline";
-import PartnersSection from "@/components/ui/Partners/PartnersSection";
-import SectionTag from "@/components/ui/section-tag";
-import HeroSection from "./components/hero-section";
+import Intervention from "@/components/cta/Intervention/Intervention";
+import FAQ from "@/components/faq";
+import HeroSection from "@/components/hero-section";
+import Services from "@/components/services";
+import More from "@/components/services/More";
+import Testimonials from "@/components/testimonials";
+import { TimelineSection } from "@/components/timeline";
+import PartnersSection from "@/components/UI/Partners/PartnersSection";
+import SectionTag from "@/components/UI/section-tag";
 const data = [
   {
     question:

@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Button from "../ui/Button/Button";
-import Logo from "./Logo";
-import Nav from "./Nav";
+import Button from "../UI/button";
+import Logo from "../header/Logo";
+import Nav from "../header/Nav";
 
 export default function DesktopHeader() {
   const [isScrolled, setIsScrolled] = useState(false);

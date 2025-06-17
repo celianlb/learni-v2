@@ -1,0 +1,46 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
+description: Next.js (App Router) project guidelines and best practices
+alwaysApply: true
+---
+
+## General
+- The Cursor AI assistant should act as an experienced developer, proficient in Next.js (App Router), React, Tailwind CSS, TypeScript, Zustand, and Zod.
+- Always leverage knowledge of the latest **stable** versions of these technologies when providing code or guidance, ensuring modern best practices are followed.
+
+## Project Structure
+- **No `src` directory**: Place application code at the root (using Next.js App Router structure). The `app/` directory is the primary location for pages and routes.
+- **Page routes**: Create each page as a folder under `app/` with a `page.tsx` file. For example, a page route might be `app/example-page/page.tsx`.
+- **API routes**: Define API route handlers in the `app/api/` directory. For instance, an endpoint could reside in `app/api/example/route.ts` (where `example` is the API route folder).
+- **Shared layouts**: Use `layout.tsx` files for shared layouts within the `app/` directory structure. Layout files wrap child pages and can be nested for different sections of the app.
+- **Directory naming**: Name all directories in **camelCase**. Avoid using spaces, underscores, or hyphens in folder names; instead, combine words (e.g., `userProfile`, `orderManagement`) for consistency.
+
+## Components
+- **Component file naming**: Name React component files using hyphen-case (kebab-case) for clarity. For example: `header-menu.tsx`, `user-profile-card.tsx`. Inside each file, the React component should still use PascalCase (e.g., a file `header-menu.tsx` exports a component named `HeaderMenu`).
+- **UI components directory**: Place all reusable UI components (common presentational components, design system elements) in the `components/UI/` directory. This could include buttons, form inputs, modals, etc., that are used across different parts of the app.
+- **Main components directory**: Place feature-specific or higher-level components in the root `components/` directory. These might be components closely tied to business logic or page-specific components that are not purely generic UI elements.
+
+## Rendering
+- **Server-Side Rendering by default**: All pages and components should use Next.js Server Components (SSR) by default. Do **not** use Client-Side Rendering (CSR) or add the `"use client"` directive unless absolutely necessary (e.g., for interactive stateful components). This ensures better performance and SEO by default.
+- **Lazy-loading images**: Load images lazily to improve performance. When using the native `<img>` tag, include `loading="lazy"` by default. (If using Next.js `<Image>` components, note that they are lazy-loaded by default unless configured otherwise.)
+- **Selective CSR when needed**: Only convert a component to a Client Component (by adding `"use client"`) in exceptional cases where interactivity or browser-only APIs are required. Justify any use of CSR with a clear need (such as stateful UI or event handling that cannot be done on the server).
+
+## Code Quality
+- **ESLint and Prettier**: Always adhere to code style and linting standards. The agent should automatically apply ESLint fixes and Prettier formatting after writing or editing code. Use the standard Next.js TypeScript ESLint configuration (which extends `next/core-web-vitals`) as a baseline for rules.
+- **Next.js & TypeScript conventions**: Follow Next.js recommended conventions for project structure and TypeScript usage. For example, define types and interfaces for props and API responses, avoid using deprecated methods, and prefer idiomatic React/Next patterns.
+- **Consistent formatting**: Ensure the codebase remains clean and consistent. The AI assistant should produce code that passes lint checks and is formatted according to the project's Prettier config (typically 2-space indentation, semi-colons, quotes, etc., as per Next.js defaults).
+
+## Accessibility
+- **WCAG compliance**: Follow Web Content Accessibility Guidelines (WCAG) best practices for all UI. This includes ensuring sufficient color contrast for text and UI elements, and providing meaningful feedback for user interactions.
+- **Labels and alt text**: Always use explicit `<label>` elements for form inputs and provide descriptive `alt` attributes for images. Every interactive element should have an accessible name or label (for instance, using `aria-label` when a visible label is not present).
+- **Semantic HTML**: Use semantic HTML elements where possible (`<main>`, `<nav>`, `<section>`, `<article>`, `<button>`, etc.) to improve accessibility and SEO. Avoid div-only structures for content that has semantic meaning.
+- **Keyboard navigation**: Ensure that all interactive components are usable via keyboard (e.g., using proper focus management and `tabIndex` where needed). Visible focus states should be present on focusable elements to aid users navigating via keyboard.
+
+## Hooks and State Management
+- **Custom hooks**: Organize custom React hooks in a `hooks/` directory. Name each hook file by its purpose, using the `useSomething.ts` convention (for example, `useAuth.ts` for an authentication hook). Each file should ideally export a single default hook corresponding to the filename.
+- **Zustand stores**: Keep state management logic using Zustand in a `stores/` directory. Name each store file after the state slice or feature, followed by `Store.ts` (e.g., `authStore.ts`, `cartStore.ts`). Within each store file, define the Zustand create function and export the store hook (e.g., `useAuthStore`).
+- **Separation of concerns**: Do not mix multiple unrelated hooks or stores in one file. Keep each custom hook or Zustand store focused on a specific concern or feature. This makes the code easier to maintain and allows the AI assistant to provide more targeted help for each functionality.

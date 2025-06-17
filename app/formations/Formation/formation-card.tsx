@@ -3,6 +3,7 @@ import { FormationWithRelations } from "@/types/formation";
 import Image from "next/image";
 import Link from "next/link";
 import "../../../components/ui/Card/card.css";
+import FormationTag from "./formation-tag";
 
 interface FormationCardProps {
   formation: FormationWithRelations;
@@ -44,7 +45,7 @@ export default function FormationCard({
     <Link href={`/formations/${formation.slug}`}>
       <div
         className={cn(
-          `border-[0.5px] group hover:border-custom-blue-900  bg-custom-blue-800 hover:bg-blue-900 text-white transition-all duration-500 ease-in-out p-6 flex flex-col justify-between rounded-[24px] group relative overflow-hidden cursor-pointer shadow-white before:absolute before:inset-0 before:opacity-[0.3] before:bg-[url('/assets/noise-texture.jpeg')] before:bg-cover before:mix-blend-overlay shadow-[inset_0px_0px_4px_0px_rgba(0,0,0,0.2)]`,
+          `border-[0.5px] group   bg-custom-blue-800 hover:bg-custom-blue-600 text-white transition-all duration-500 ease-in-out p-6 flex flex-col justify-between rounded-[24px] group relative overflow-hidden cursor-pointer shadow-white before:absolute before:inset-0 before:opacity-[0.1] before:bg-[url('/assets/noise-texture.jpeg')] before:bg-cover before:mix-blend-overlay shadow-[inset_0px_0px_4px_0px_rgba(10,2,65,0.5)]`,
           cardStyles[variant],
           className
         )}
@@ -58,51 +59,33 @@ export default function FormationCard({
           {formation.titre}
         </h3>
         <div className="flex flex-wrap gap-2 transition-all duration-300 ease-in-out group-hover:-translate-x-[150%]">
-          <span className="font-archivo capitalize text-[14px] rounded-lg px-3 py-1 text-white bg-custom-blue-700 border flex items-center gap-2">
-            <Image
-              src="/svg/formation-card/person.svg"
-              alt="niveau"
-              width={16}
-              height={16}
-            />
-            {formation.niveau}
-          </span>
-          <span className="font-archivo text-[14px] rounded-lg px-3 py-1 text-white bg-custom-blue-700 border  flex items-center gap-2">
-            <Image
-              src="/svg/formation-card/price.svg"
-              alt="prix"
-              width={16}
-              height={16}
-            />
-            {formatPrice(formation.tarifIndividuel)}
-          </span>
-          <span className="font-archivo text-[14px] rounded-lg px-3 py-1 text-white bg-custom-blue-700 border flex items-center gap-2">
-            <Image
-              src="/svg/formation-card/duration.svg"
-              alt="durée"
-              width={16}
-              height={16}
-            />
-            {formatDuration(formation.duree)}
-          </span>
-          <span className="font-archivo capitalize text-[14px] rounded-lg px-3 py-1 text-white bg-custom-blue-700 border flex items-center gap-2">
-            <Image
-              src="/svg/formation-card/desktop.svg"
-              alt="format"
-              width={16}
-              height={16}
-            />
-            {formation.format}
-          </span>
-          <span className="font-archivo text-[14px] rounded-lg px-3 py-1 text-white bg-custom-blue-700 border flex items-center gap-2 ">
-            <Image
-              src="/svg/formation-card/person.svg"
-              alt="participants"
-              width={16}
-              height={16}
-            />
-            {formatPeople(formation.participantsMax)}
-          </span>
+          <FormationTag
+            icon="/svg/formation-card/person.svg"
+            alt="niveau"
+            text={formation.niveau}
+            className="capitalize"
+          />
+          <FormationTag
+            icon="/svg/formation-card/price.svg"
+            alt="prix"
+            text={formatPrice(formation.tarifIndividuel)}
+          />
+          <FormationTag
+            icon="/svg/formation-card/duration.svg"
+            alt="durée"
+            text={formatDuration(formation.duree)}
+          />
+          <FormationTag
+            icon="/svg/formation-card/desktop.svg"
+            alt="format"
+            text={formation.format}
+            className="capitalize"
+          />
+          <FormationTag
+            icon="/svg/formation-card/person.svg"
+            alt="participants"
+            text={formatPeople(formation.participantsMax)}
+          />
         </div>
         <div
           className={cn(

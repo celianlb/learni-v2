@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Card from "../ui/Card/Card";
+import Card from "../UI/Card/Card";
 
 export type Testimonial = {
   school: string;
@@ -30,7 +30,7 @@ export default function TestimonialCard({
       <p className=" font-work-sans font-normal text-[16px] leading-tight tracking-tight opacity-80 text-white">
         {testimonial.quote}
       </p>
-      <p className=" font-work-sans font-normal text-[16px] tracking-tight text-white">
+      <p className=" font-work-sans font-medium opacity-90 text-[16px] tracking-tight text-white">
         {testimonial.name} - {testimonial.job}
       </p>
     </Card>

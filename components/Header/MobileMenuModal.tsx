@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Button from "../ui/Button/Button";
+import Nav from "../header/Nav";
+import Button from "../UI/button";
 import "./MobileMenuModal.css";
-import Nav from "./Nav";
 
 interface MobileMenuModalProps {
   open: boolean;

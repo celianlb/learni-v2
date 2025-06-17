@@ -1,5 +1,4 @@
-import TestimonialCard, { Testimonial } from "./TestimonialCard";
-
+import TestimonialCard, { Testimonial } from "./testimonial-card";
 const testimonials: Testimonial[] = [
   {
     school: "Ingetis",
@@ -51,11 +50,12 @@ export default function Testimonials() {
 
   return (
     <section className="flex flex-col mt-24 md:mt-48">
-      <h2 className="text-[32px] text-custom-blue-900 tracking-tight font-manrope font-bold">
-        Ce qu&apos;ils disent de nous
+      <h2 className=" font-manrope tracking-[-1px] text-[28px] md:text-[32px] leading-tight">
+        Ce qu&apos;ils disent de <span className="font-extrabold">Learni</span>
       </h2>
       {/* Desktop */}
-      <div className="hidden lg:grid grid-cols-3 gap-8 w-full">
+      <div className="hidden lg:grid grid-cols-3 gap-8 w-full relative">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-200/20 via-blue-400/10 to-blue-200/20 blur-3xl -z-10" />
         {columnsDesktop.map((col, colIdx) => (
           <div
             key={colIdx}

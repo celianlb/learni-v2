@@ -1,4 +1,4 @@
-import Card from "@/components/ui/Card/Card";
+import Card from "@/components/UI/Card/Card";
 import { getOneFormation } from "@/queries/getFormation";
 import Image from "next/image";
 import { notFound } from "next/navigation";

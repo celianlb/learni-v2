@@ -1,9 +1,9 @@
 import Image from "next/image";
-import Button from "../ui/Button/Button";
+import Button from "../UI/button";
 export default function Services() {
   return (
     <section className="flex flex-col gap-16 md:gap-24 mt-28 md:mt-48">
-      <h2 className=" font-manrope text-[28px] md:text-[32px] leading-tight">
+      <h2 className=" font-manrope tracking-[-1px] text-[28px] md:text-[32px] leading-tight">
         Ce qu&apos;on propose chez{" "}
         <span className="font-extrabold">Learni</span>
       </h2>
@@ -17,6 +17,7 @@ export default function Services() {
           className="w-full md:w-1/2"
           width={675}
           height={635}
+          loading="lazy"
         />
         <div className="flex flex-col justify-between gap-8">
           <div className="flex flex-col gap-6">
@@ -39,7 +40,7 @@ export default function Services() {
               <p className="font-manrope text-[14px] leading-tight text-custom-blue-900 opacity-70">
                 Vous avez besoin d&apos;un formateur pour votre école ?
               </p>
-              <Button variant="secondary" className="w-fit">
+              <Button variant="secondary" className="w-fit" href="/contact">
                 Contactez-nous
               </Button>
             </div>
@@ -63,7 +64,7 @@ export default function Services() {
               nous mettons <b>l’expertise au service de votre performance</b>.
             </p>
             <div className="hidden md:block">
-              <Button variant="secondary" className="w-fit">
+              <Button variant="secondary" className="w-fit" href="/formations">
                 Découvrir nos formations
               </Button>
             </div>
@@ -75,6 +76,7 @@ export default function Services() {
           className="w-full md:w-1/2"
           width={675}
           height={635}
+          loading="lazy"
         />
         <div className="block md:hidden">
           <Button variant="secondary" className="w-fit">

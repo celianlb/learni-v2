@@ -1,5 +1,5 @@
-import { FlipWords } from "@/components/ui/flip-words";
-import PartnersSlider from "@/components/ui/Partners/PartnersSlider";
+import { FlipWords } from "@/components/UI/flip-words";
+import PartnersSlider from "@/components/UI/Partners/PartnersSlider";
 import { partners } from "@/data/partners";
 import SearchBar from "../../searchbar";
 

@@ -31,7 +31,7 @@ export default async function SectionAllFormations() {
     );
 
     return (
-      <section className="relative">
+      <section className="relative" id="formations">
         <div className="space-y-20">
           {categories
             .slice(0, 6)
@@ -41,7 +41,7 @@ export default async function SectionAllFormations() {
 
               return (
                 <div key={category.id} className="space-y-8">
-                  <h3 className="text-custom-blue-900 font-work-sans tracking-tight font-semibold text-[24px]">
+                  <h3 className="text-custom-blue-900 font-work-sans tracking-[-1px] font-medium text-[24px]">
                     {category.name}
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pb-4">

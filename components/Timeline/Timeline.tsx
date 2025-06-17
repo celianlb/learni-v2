@@ -32,7 +32,7 @@ export const Timeline = ({ data }: { data: TimelineEntry[] }) => {
       className="w-full bg-white font-sans mt-32 md:mt-48"
       ref={containerRef}
     >
-      <h2 className=" font-manrope text-[28px] md:text-[32px] mb-12 md:mb-0 leading-tight">
+      <h2 className=" tracking-[-1px] font-manrope text-[28px] md:text-[32px] mb-12 md:mb-0 leading-tight">
         L&apos;historique de
         <span className="font-extrabold"> Learni</span>
       </h2>

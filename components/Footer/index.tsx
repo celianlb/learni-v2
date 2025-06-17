@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import Logo from "../Header/Logo";
+import Logo from "../header/Logo";
 
 const SOCIAL = [
   {

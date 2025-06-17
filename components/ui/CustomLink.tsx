@@ -19,19 +19,11 @@ export default function CustomLink({
   return (
     <Link
       href={href}
-      className={`group  hover:text-blue-700  flex items-center gap-2 font-work-sans tracking-tight text-[16px] font-normal transition-colors duration-200 ${
+      className={`group  hover:text-custom-blue-900/70   flex items-center gap-2 font-work-sans tracking-tight text-[16px] font-normal transition-colors duration-200 ${
         isActive ? "text-custom-blue-600" : "text-custom-blue-900"
       }`}
     >
-      {Icon && (
-        <Icon
-          className={`size-4 transition-transform duration-200 group-hover:text-blue-300 ${
-            isActive
-              ? "text-color-custom-blue-300"
-              : "text-color-custom-blue-900"
-          }`}
-        />
-      )}
+      {Icon && <Icon className="size-4 transition-transform duration-200" />}
       {children}
     </Link>
   );
