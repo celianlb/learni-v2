@@ -1,7 +1,6 @@
+import FormationCard from "@/components/formation/formation-card";
 import { getAllFormations } from "@/queries/getFormation";
 import { FormationWithRelations } from "@/types/formation";
-import FormationCard from "../Formation/formation-card";
-
 interface SuggestedFormationProps {
   currentSlug: string;
 }

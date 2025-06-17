@@ -2,7 +2,6 @@ import { cn } from "@/lib/utils";
 import { FormationWithRelations } from "@/types/formation";
 import Image from "next/image";
 import Link from "next/link";
-import "../../../components/ui/Card/card.css";
 import FormationTag from "./formation-tag";
 
 interface FormationCardProps {

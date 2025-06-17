@@ -1,14 +1,14 @@
 "use client";
+import FilterFormation from "@/components/formation/filter/filter-formation";
+import { Tag } from "@/components/formation/filter/types";
+import FormationCard from "@/components/formation/formation-card";
+import FormationCardSkeleton from "@/components/formation/formation-card-skeleton";
 import Button from "@/components/UI/button";
 import Input from "@/components/UI/Input/Input";
 import { useFilterFormationStore } from "@/store/filterFormationStore";
 import { FormationWithRelations } from "@/types/formation";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import FilterFormation from "../Formation/Filter/filter-formation";
-import { Tag } from "../Formation/Filter/types";
-import FormationCard from "../Formation/formation-card";
-import FormationCardSkeleton from "../Formation/formation-card-skeleton";
 
 export default function SearchResultsContent() {
   const searchParams = useSearchParams();

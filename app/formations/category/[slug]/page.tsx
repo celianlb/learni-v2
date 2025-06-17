@@ -1,7 +1,7 @@
+import FormationCard from "@/components/formation/formation-card";
 import { getAllCategories } from "@/queries/getCategories";
 import { getFormationByCategory } from "@/queries/getFormationByCategory";
 import { notFound } from "next/navigation";
-import FormationCard from "../../Formation/formation-card";
 import HeroCategory from "./hero-section";
 
 export default async function CategoryPage({

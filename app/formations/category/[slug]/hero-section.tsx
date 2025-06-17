@@ -1,7 +1,7 @@
 import { FlipWords } from "@/components/UI/flip-words";
 import PartnersSlider from "@/components/UI/Partners/PartnersSlider";
 import { partners } from "@/data/partners";
-import SearchBar from "../../searchbar";
+import SearchBar from "../../../../components/formation/searchbar";
 
 interface HeroCategoryProps {
   category: {

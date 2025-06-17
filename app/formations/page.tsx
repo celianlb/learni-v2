@@ -2,9 +2,10 @@ import CategorySection from "@/components/category/section-category";
 import Intervention from "@/components/cta/Intervention/Intervention";
 import FAQ from "@/components/faq";
 import { Metadata } from "next";
-import SectionAllFormations from "./Formation/section-all-formations";
-import Top3Formations from "./Formation/section-top3-formations";
-import Hero from "./Hero";
+
+import SectionAllFormations from "@/components/formation/section-all-formations";
+import Top3Formations from "@/components/formation/section-top3-formations";
+import Hero from "../../components/formation/hero-section";
 
 export const metadata: Metadata = {
   title: "Les formations - Learni",

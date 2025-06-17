@@ -1,4 +1,5 @@
 import Input from "@/components/UI/Input/Input";
+import { useFilterFormationStore } from "@/store/filterFormationStore";
 import {
   AcademicCapIcon,
   ClockIcon,
@@ -7,7 +8,6 @@ import {
   TagIcon,
 } from "@heroicons/react/24/outline";
 import React, { useEffect, useRef, useState } from "react";
-import { useFilterFormationStore } from "../../../../store/filterFormationStore";
 import { BudgetDoubleSlider } from "./budget-double-slider";
 import { Category, Tag } from "./types";
 
