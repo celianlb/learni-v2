@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useRef } from "react";
 
 interface BudgetDoubleSliderProps {
@@ -61,10 +63,10 @@ export const BudgetDoubleSlider: React.FC<BudgetDoubleSliderProps> = ({
     <div className="w-full px-2">
       <div ref={sliderRef} className="relative h-3 flex items-center">
         {/* Rail */}
-        <div className="absolute h-2 w-full rounded-full bg-indigo-100" />
+        <div className="absolute h-2 w-full rounded-full bg-custom-blue-900/30" />
         {/* Track sélectionné */}
         <div
-          className="absolute h-2 rounded-full bg-customBlue-800"
+          className="absolute h-2 rounded-full bg-custom-blue-800"
           style={{
             left: `${valueToPercent(value[0])}%`,
             width: `${valueToPercent(value[1]) - valueToPercent(value[0])}%`,
@@ -72,13 +74,13 @@ export const BudgetDoubleSlider: React.FC<BudgetDoubleSliderProps> = ({
         />
         {/* Poignée min */}
         <div
-          className="absolute z-10 w-7 h-7 bg-customBlue-800 rounded-full border-4 border-white cursor-pointer shadow"
+          className="absolute z-10 w-6 h-6 bg-white rounded-full border-4 border-custom-blue-900 cursor-pointer shadow"
           style={{ left: `calc(${valueToPercent(value[0])}% - 0.875rem)` }}
           onMouseDown={onMouseDown("min")}
         />
         {/* Poignée max */}
         <div
-          className="absolute z-10 w-7 h-7 bg-customBlue-900 rounded-full border-4 border-white cursor-pointer shadow"
+          className="absolute z-10 w-6 h-6 bg-white rounded-full border-4 border-custom-blue-900 cursor-pointer shadow"
           style={{ left: `calc(${valueToPercent(value[1])}% - 0.875rem)` }}
           onMouseDown={onMouseDown("max")}
         />

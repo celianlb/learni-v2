@@ -44,14 +44,14 @@ export default function FormationCard({
     <Link href={`/formations/${formation.slug}`}>
       <div
         className={cn(
-          `border-[0.5px] group   bg-custom-blue-800 hover:bg-custom-blue-600 text-white transition-all duration-500 ease-in-out p-6 flex flex-col justify-between rounded-[24px] group relative overflow-hidden cursor-pointer shadow-white before:absolute before:inset-0 before:opacity-[0.1] before:bg-[url('/assets/noise-texture.jpeg')] before:bg-cover before:mix-blend-overlay shadow-[inset_0px_0px_4px_0px_rgba(10,2,65,0.5)]`,
+          `border-[1px] group border-custom-blue-900/30 bg-gray-100 hover:bg-custom-blue-900 text-white transition-all duration-500 ease-in-out p-6 flex flex-col justify-between rounded-[24px] group relative overflow-hidden cursor-pointer shadow-white`,
           cardStyles[variant],
           className
         )}
       >
         <h3
           className={cn(
-            "text-lg font-work-sans tracking-tight font-medium",
+            "text-lg font-work-sans group-hover:text-white text-custom-blue-900 tracking-tight font-medium",
             variant === "auto" ? "mb-8" : "mb-4"
           )}
         >

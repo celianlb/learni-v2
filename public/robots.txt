@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://learni.fr/sitemap.xml
+
+# Crawl-delay pour éviter de surcharger le serveur
+Crawl-delay: 1
+
+# Bloquer les pages d'administration et API (si nécessaire)
+Disallow: /api/
+Disallow: /admin/
+
+# Permettre l'indexation des formations
+Allow: /formations/
+Allow: /formations/recherche
+Allow: /formations/category/
+
+# Permettre l'indexation du blog
+Allow: /blog/ 

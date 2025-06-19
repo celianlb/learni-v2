@@ -1,201 +1,67 @@
-"use client";
 import FilterFormation from "@/components/formation/filter/filter-formation";
-import { Tag } from "@/components/formation/filter/types";
-import FormationCard from "@/components/formation/formation-card";
-import FormationCardSkeleton from "@/components/formation/formation-card-skeleton";
-import Button from "@/components/UI/button";
-import Input from "@/components/UI/Input/Input";
-import { useFilterFormationStore } from "@/store/filterFormationStore";
+import { Category, Tag } from "@/components/formation/filter/types";
+import SearchForm from "@/components/formation/search-form";
+import SearchResultsClient from "@/components/formation/search-results-client";
+import {
+  getCategories,
+  getFormationFilterData,
+  getTags,
+} from "@/queries/getFilterData";
+import { searchFormations } from "@/queries/searchFormations";
 import { FormationWithRelations } from "@/types/formation";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
 
-export default function SearchResultsContent() {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const query = searchParams.get("q") || "";
-  const [searchInput, setSearchInput] = useState(query);
-  const [results, setResults] = useState<FormationWithRelations[]>([]);
-  const [filteredResults, setFilteredResults] = useState<
-    FormationWithRelations[]
-  >([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const { appliedFilters, resetFilters } = useFilterFormationStore();
-  const [visibleCount, setVisibleCount] = useState(12);
+interface SearchResultsContentProps {
+  searchParams: Promise<{ q?: string }>;
+}
 
-  useEffect(() => {
-    setSearchInput(query);
-  }, [query]);
+export default async function SearchResultsContent({
+  searchParams,
+}: SearchResultsContentProps) {
+  const { q: query } = await searchParams;
 
-  useEffect(() => {
-    const fetchResults = async () => {
-      setIsLoading(true);
-      try {
-        let url = "/api/formation/search";
-        if (query) {
-          url += `?q=${encodeURIComponent(query)}`;
-        }
-        const response = await fetch(url);
-        const data = await response.json();
-        setResults(data);
-      } catch (error) {
-        console.error("Erreur lors de la recherche:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchResults();
-  }, [query]);
-
-  useEffect(() => {
-    // Filtrage en temps réel
-    let filtered = results;
-    const hasActiveFilters =
-      appliedFilters.categories.length > 0 ||
-      appliedFilters.tags.length > 0 ||
-      appliedFilters.levels.length > 0 ||
-      appliedFilters.budget[0] !== 0 ||
-      appliedFilters.budget[1] !== 5000;
-
-    // Si aucun filtre n'est actif, afficher tous les résultats
-    if (!hasActiveFilters) {
-      setFilteredResults(results);
-      return;
-    }
-
-    // Filtre catégories
-    if (appliedFilters.categories.length > 0) {
-      filtered = filtered.filter(
-        (f) => f.category && appliedFilters.categories.includes(f.category.name)
-      );
-    }
-
-    // Filtre tags
-    if (appliedFilters.tags.length > 0) {
-      filtered = filtered.filter((f) =>
-        f.tags.some((tag: Tag) => appliedFilters.tags.includes(tag.name))
-      );
-    }
-
-    // Filtre niveau
-    if (appliedFilters.levels.length > 0) {
-      filtered = filtered.filter((f) =>
-        appliedFilters.levels.includes(f.niveau)
-      );
-    }
-
-    // Filtre budget
-    if (appliedFilters.budget && Array.isArray(appliedFilters.budget)) {
-      filtered = filtered.filter((f) => {
-        const price = parseInt(f.tarifIndividuel.replace(/[^0-9]/g, ""));
-        return (
-          price >= appliedFilters.budget[0] && price <= appliedFilters.budget[1]
-        );
-      });
-    }
-
-    // Filtre durée
-    if (appliedFilters.durations.length > 0) {
-      filtered = filtered.filter((f) =>
-        appliedFilters.durations.includes(f.duree)
-      );
-    }
-
-    // Filtre format
-    if (appliedFilters.formats.length > 0) {
-      filtered = filtered.filter((f) =>
-        appliedFilters.formats.includes(f.format)
-      );
-    }
-
-    setFilteredResults(filtered);
-  }, [results, appliedFilters]);
-
-  useEffect(() => {
-    setVisibleCount(12); // Réinitialise la pagination à chaque nouvelle recherche/filtre
-  }, [results, appliedFilters]);
-
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    router.push(
-      `/formations/recherche${
-        searchInput ? `?q=${encodeURIComponent(searchInput)}` : ""
-      }`
-    );
+  // Récupération des données côté serveur en parallèle avec gestion d'erreur
+  let results: FormationWithRelations[] = [];
+  let categories: Category[] = [];
+  let tags: Tag[] = [];
+  let filterData = {
+    levels: [] as string[],
+    durations: [] as string[],
+    formats: [] as string[],
   };
 
-  const handleReset = () => {
-    setSearchInput("");
-    resetFilters();
-    router.push("/formations/recherche");
-  };
+  try {
+    [results, categories, tags, filterData] = await Promise.all([
+      searchFormations(query),
+      getCategories(),
+      getTags(),
+      getFormationFilterData(),
+    ]);
+  } catch (error) {
+    console.error("Erreur lors de la récupération des données:", error);
+    // En cas d'erreur, on utilise des valeurs par défaut
+  }
 
   return (
     <div className="container mx-auto px-4 py-48">
-      <form onSubmit={handleSearchSubmit} className="mb-6 flex gap-2">
-        <Input
-          type="text"
-          placeholder="Rechercher une formation..."
-          value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)}
-          className="max-w-lg"
-        />
-        <Button
-          type="submit"
-          className="bg-custom-blue-900 text-white px-4 py-2 rounded-lg"
-        >
-          Rechercher
-        </Button>
-        <Button
-          type="button"
-          variant="secondary"
-          onClick={handleReset}
-          className="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg border border-gray-300 ml-2"
-        >
-          Réinitialiser
-        </Button>
-      </form>
-      <FilterFormation />
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
-        <h1 className="text-2xl font-semibold">
-          {query ? `Résultats pour "${query}"` : "Toutes les formations"}
-        </h1>
-      </div>
-      {isLoading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {Array.from({ length: 12 }).map((_, i) => (
-            <FormationCardSkeleton key={i} />
-          ))}
-        </div>
-      ) : filteredResults.length > 0 ? (
-        <>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredResults.slice(0, visibleCount).map((formation) => (
-              <FormationCard
-                key={formation.id}
-                formation={formation}
-                variant="default"
-              />
-            ))}
+      <SearchForm initialQuery={query || ""} />
+
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        {/* Colonne des filtres */}
+        <div className="lg:col-span-1">
+          <div className="sticky top-32">
+            <FilterFormation
+              initialCategories={categories}
+              initialTags={tags}
+              initialLevels={filterData.levels}
+              initialDurations={filterData.durations}
+              initialFormats={filterData.formats}
+            />
           </div>
-          {visibleCount < filteredResults.length && (
-            <div className="flex justify-center mt-8">
-              <button
-                className="px-6 py-2 bg-custom-blue-900 text-white rounded-lg shadow hover:bg-custom-blue-800"
-                onClick={() => setVisibleCount((c) => c + 12)}
-              >
-                Voir plus
-              </button>
-            </div>
-          )}
-        </>
-      ) : (
-        <div className="text-center py-8 text-gray-500">
-          {query
-            ? `Aucun résultat trouvé pour "${query}"`
-            : "Aucune formation ne correspond aux filtres"}
         </div>
-      )}
+
+        {/* Colonne des résultats */}
+        <SearchResultsClient initialResults={results} query={query || ""} />
+      </div>
     </div>
   );
 }

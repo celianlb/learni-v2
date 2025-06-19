@@ -1,3 +1,4 @@
+"use client";
 import Input from "@/components/UI/Input/Input";
 import { useFilterFormationStore } from "@/store/filterFormationStore";
 import {
@@ -13,16 +14,27 @@ import { Category, Tag } from "./types";
 
 type FilterFormationProps = {
   onValidate?: () => void;
+  initialCategories?: Category[];
+  initialTags?: Tag[];
+  initialLevels?: string[];
+  initialDurations?: string[];
+  initialFormats?: string[];
 };
 
-const FilterFormation: React.FC<FilterFormationProps> = () => {
+const FilterFormation: React.FC<FilterFormationProps> = ({
+  initialCategories = [],
+  initialTags = [],
+  initialLevels = [],
+  initialDurations = [],
+  initialFormats = [],
+}) => {
   const { editingFilters, setEditing, applyFilters } =
     useFilterFormationStore();
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [tags, setTags] = useState<Tag[]>([]);
-  const [levels, setLevels] = useState<string[]>([]);
-  const [durations, setDurations] = useState<string[]>([]);
-  const [formats, setFormats] = useState<string[]>([]);
+  const [categories, setCategories] = useState<Category[]>(initialCategories);
+  const [tags, setTags] = useState<Tag[]>(initialTags);
+  const [levels, setLevels] = useState<string[]>(initialLevels);
+  const [durations, setDurations] = useState<string[]>(initialDurations);
+  const [formats, setFormats] = useState<string[]>(initialFormats);
 
   // États pour les dropdowns custom
   const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = useState(false);
@@ -43,53 +55,83 @@ const FilterFormation: React.FC<FilterFormationProps> = () => {
   const levelDropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const categoriesResponse = await fetch("/api/categories");
-        const categoriesData = await categoriesResponse.json();
-        setCategories(categoriesData);
+    // Si les données initiales sont fournies, les utiliser
+    if (initialCategories.length > 0) {
+      setCategories(initialCategories);
+    }
+    if (initialTags.length > 0) {
+      setTags(initialTags);
+    }
+    if (initialLevels.length > 0) {
+      setLevels(initialLevels);
+    }
+    if (initialDurations.length > 0) {
+      setDurations(initialDurations);
+    }
+    if (initialFormats.length > 0) {
+      setFormats(initialFormats);
+    }
 
-        const tagsResponse = await fetch("/api/tags");
-        const tagsData = await tagsResponse.json();
-        setTags(tagsData);
+    // Si aucune donnée initiale n'est fournie, faire l'appel API
+    if (
+      initialCategories.length === 0 &&
+      initialTags.length === 0 &&
+      initialLevels.length === 0
+    ) {
+      const fetchData = async () => {
+        try {
+          const categoriesResponse = await fetch("/api/categories");
+          const categoriesData = await categoriesResponse.json();
+          setCategories(categoriesData);
 
-        const formationsResponse = await fetch("/api/formations");
-        const formationsData: {
-          niveau: string;
-          duree: string;
-          format: string;
-        }[] = await formationsResponse.json();
-        const uniqueLevels = Array.from(
-          new Set(formationsData.map((f) => f.niveau))
-        ).filter(Boolean) as string[];
-        setLevels(uniqueLevels);
-        // Normalisation des durées
-        const normalizeDuration = (duree: string) => {
-          if (!duree) return null;
-          const d = duree.toLowerCase().replace(/\s/g, "");
-          if (d.startsWith("1j")) return "1 jour";
-          if (d.startsWith("2j")) return "2 jours";
-          if (d.startsWith("3j")) return "3 jours";
-          return duree;
-        };
-        const uniqueDurations = Array.from(
-          new Set(
-            formationsData
-              .map((f) => normalizeDuration(f.duree))
-              .filter(Boolean)
-          )
-        ).filter((d): d is string => typeof d === "string");
-        setDurations(uniqueDurations);
-        const uniqueFormats = Array.from(
-          new Set(formationsData.map((f) => f.format))
-        ).filter(Boolean) as string[];
-        setFormats(uniqueFormats);
-      } catch (error) {
-        console.error("Erreur lors de la récupération des données:", error);
-      }
-    };
-    fetchData();
-  }, []);
+          const tagsResponse = await fetch("/api/tags");
+          const tagsData = await tagsResponse.json();
+          setTags(tagsData);
+
+          const formationsResponse = await fetch("/api/formations");
+          const formationsData: {
+            niveau: string;
+            duree: string;
+            format: string;
+          }[] = await formationsResponse.json();
+          const uniqueLevels = Array.from(
+            new Set(formationsData.map((f) => f.niveau))
+          ).filter(Boolean) as string[];
+          setLevels(uniqueLevels);
+          // Normalisation des durées
+          const normalizeDuration = (duree: string) => {
+            if (!duree) return null;
+            const d = duree.toLowerCase().replace(/\s/g, "");
+            if (d.startsWith("1j")) return "1 jour";
+            if (d.startsWith("2j")) return "2 jours";
+            if (d.startsWith("3j")) return "3 jours";
+            return duree;
+          };
+          const uniqueDurations = Array.from(
+            new Set(
+              formationsData
+                .map((f) => normalizeDuration(f.duree))
+                .filter(Boolean)
+            )
+          ).filter((d): d is string => typeof d === "string");
+          setDurations(uniqueDurations);
+          const uniqueFormats = Array.from(
+            new Set(formationsData.map((f) => f.format))
+          ).filter(Boolean) as string[];
+          setFormats(uniqueFormats);
+        } catch (error) {
+          console.error("Erreur lors de la récupération des données:", error);
+        }
+      };
+      fetchData();
+    }
+  }, [
+    initialCategories,
+    initialTags,
+    initialLevels,
+    initialDurations,
+    initialFormats,
+  ]);
 
   // Gestion catégories (boutons)
   const handleCategoryClick = (catName: string) => {
@@ -162,22 +204,6 @@ const FilterFormation: React.FC<FilterFormationProps> = () => {
   const filteredDurations = durations;
   const filteredFormats = formats;
 
-  const [selectedDurations, setSelectedDurations] = useState<string[]>([]);
-  const [selectedFormats, setSelectedFormats] = useState<string[]>([]);
-
-  // Synchronisation avec le store
-  useEffect(() => {
-    setEditing({ durations: selectedDurations, formats: selectedFormats });
-    applyFilters();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedDurations, selectedFormats]);
-
-  // Réinitialisation des sélections locales si le store est reset
-  useEffect(() => {
-    setSelectedDurations([]);
-    setSelectedFormats([]);
-  }, [editingFilters.durations.length, editingFilters.formats.length]);
-
   // Filtrer les niveaux en fonction de la recherche (insensible aux accents)
   const filteredLevels = levels.filter((level) =>
     normalizeString(level).includes(normalizeString(levelSearch))
@@ -227,11 +253,18 @@ const FilterFormation: React.FC<FilterFormationProps> = () => {
   );
 
   return (
-    <div className="flex flex-wrap items-end gap-6 bg-white p-4 rounded-xl shadow mb-8">
+    <div className="flex flex-col gap-6 bg-white p-4 rounded-xl shadow mb-8">
+      {/* En-tête avec bouton de réinitialisation */}
+      <div className="flex justify-between items-center">
+        <h3 className="text-lg font-work-sans font-semibold text-custom-blue-900">
+          Filtres
+        </h3>
+      </div>
+
       {/* Catégories */}
-      <div ref={categoryDropdownRef} className="relative flex-1 min-w-[220px]">
+      <div ref={categoryDropdownRef} className="relative w-full">
         <button
-          className="px-4 py-2 border border-blue-950/30 bg-white cursor-pointer hover:bg-blue-50 rounded-lg text-sm  w-full text-left flex items-center justify-between transition-colors"
+          className="px-4 py-2 border border-blue-950/30 bg-white cursor-pointer hover:bg-blue-50 rounded-lg text-sm w-full text-left flex items-center justify-between transition-colors"
           onClick={() => setIsCategoryDropdownOpen(!isCategoryDropdownOpen)}
         >
           <span className="flex items-center gap-2">
@@ -281,7 +314,7 @@ const FilterFormation: React.FC<FilterFormationProps> = () => {
       </div>
 
       {/* Tags */}
-      <div ref={tagDropdownRef} className="relative flex-1 min-w-[220px]">
+      <div ref={tagDropdownRef} className="relative w-full">
         <button
           className="px-4 py-2 border border-blue-950/30 bg-white cursor-pointer hover:bg-blue-50 rounded-lg text-sm w-full text-left flex items-center justify-between transition-colors"
           onClick={() => setIsTagDropdownOpen(!isTagDropdownOpen)}
@@ -339,7 +372,7 @@ const FilterFormation: React.FC<FilterFormationProps> = () => {
       </div>
 
       {/* Niveaux */}
-      <div ref={levelDropdownRef} className="relative flex-1 min-w-[220px]">
+      <div ref={levelDropdownRef} className="relative w-full">
         <button
           className="px-4 rounded-lg text-sm cursor-pointer py-2 border border-blue-950/30 transition-all bg-white hover:bg-blue-50 w-full text-left flex items-center justify-between"
           onClick={() => setIsLevelDropdownOpen(!isLevelDropdownOpen)}
@@ -396,9 +429,102 @@ const FilterFormation: React.FC<FilterFormationProps> = () => {
         )}
       </div>
 
+      {/* Durée */}
+      <div ref={durationDropdownRef} className="relative w-full">
+        <button
+          className="px-4 cursor-pointer py-2 border rounded-lg text-sm border-blue-950/30 transition-all bg-white hover:bg-blue-50 w-full text-left flex items-center justify-between"
+          onClick={() => setIsDurationDropdownOpen(!isDurationDropdownOpen)}
+        >
+          <span className="flex items-center gap-2">
+            <ClockIcon className="w-5 h-5 text-custom-blue-900" />
+            Durée
+          </span>
+          <span className="truncate ml-2">
+            {editingFilters.durations.length > 0
+              ? `${editingFilters.durations.length} sélectionnée(s)`
+              : ""}
+          </span>
+          <Chevron open={isDurationDropdownOpen} />
+        </button>
+        {isDurationDropdownOpen && (
+          <div className="absolute left-0 right-0 z-20 mt-1 w-full border-blue-950/30 bg-white border rounded-lg shadow-lg">
+            <div className="max-h-60 overflow-y-auto">
+              {filteredDurations.map((dur) => (
+                <div
+                  key={dur}
+                  className="p-2 hover:bg-gray-100 cursor-pointer"
+                  onClick={() => {
+                    setEditing({
+                      durations: editingFilters.durations.includes(dur)
+                        ? editingFilters.durations.filter((d) => d !== dur)
+                        : [...editingFilters.durations, dur],
+                    });
+                    applyFilters();
+                  }}
+                >
+                  <input
+                    type="checkbox"
+                    checked={editingFilters.durations.includes(dur)}
+                    onChange={() => {}}
+                    className="mr-2"
+                  />
+                  {capitalize(dur)}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Format */}
+      <div ref={formatDropdownRef} className="relative w-full">
+        <button
+          className=" cursor-pointer rounded-lg text-sm px-4 py-2 border border-blue-950/30 transition-all bg-white hover:bg-blue-50 w-full text-left flex items-center justify-between"
+          onClick={() => setIsFormatDropdownOpen(!isFormatDropdownOpen)}
+        >
+          <span className="flex items-center gap-2">
+            <DeviceTabletIcon className="w-5 h-5 text-custom-blue-900" />
+            Format
+          </span>
+          <span className="truncate ml-2">
+            {editingFilters.formats.length > 0
+              ? `${editingFilters.formats.length} sélectionné(s)`
+              : ""}
+          </span>
+          <Chevron open={isFormatDropdownOpen} />
+        </button>
+        {isFormatDropdownOpen && (
+          <div className="absolute left-0 right-0 z-20 mt-1 w-full bg-white border rounded-lg shadow-lg">
+            <div className="max-h-60 overflow-y-auto">
+              {filteredFormats.map((fmt) => (
+                <div
+                  key={fmt}
+                  className="p-2 hover:bg-white cursor-pointer"
+                  onClick={() => {
+                    setEditing({
+                      formats: editingFilters.formats.includes(fmt)
+                        ? editingFilters.formats.filter((f) => f !== fmt)
+                        : [...editingFilters.formats, fmt],
+                    });
+                    applyFilters();
+                  }}
+                >
+                  <input
+                    type="checkbox"
+                    checked={editingFilters.formats.includes(fmt)}
+                    onChange={() => {}}
+                    className="mr-2"
+                  />
+                  {capitalize(fmt)}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
       {/* Budget */}
-      <div className="flex flex-col gap-2 min-w-[220px]">
-        <div className="font-semibold text-custom-blue-900">Budget (€)</div>
+      <div className="flex flex-col gap-4 w-full">
+        <div className=" text-custom-blue-900 text-sm">€ Budget </div>
         <BudgetDoubleSlider
           min={0}
           max={5000}
@@ -414,98 +540,6 @@ const FilterFormation: React.FC<FilterFormationProps> = () => {
             {editingFilters.budget[1]}€
           </span>
         </div>
-      </div>
-
-      {/* Durée */}
-      <div ref={durationDropdownRef} className="relative">
-        <button
-          className="px-4 cursor-pointer py-2 border rounded-lg text-sm border-blue-950/30 transition-all bg-white hover:bg-blue-50 w-full text-left flex items-center justify-between"
-          onClick={() => setIsDurationDropdownOpen(!isDurationDropdownOpen)}
-        >
-          <span className="flex items-center gap-2">
-            <ClockIcon className="w-5 h-5 text-custom-blue-900" />
-            Durée
-          </span>
-          <span className="truncate ml-2">
-            {selectedDurations.length > 0
-              ? `${selectedDurations.length} sélectionnée(s)`
-              : ""}
-          </span>
-          <Chevron open={isDurationDropdownOpen} />
-        </button>
-        {isDurationDropdownOpen && (
-          <div className="absolute z-10 mt-1 w-64 border-blue-950/30 bg-white border rounded-lg shadow-lg">
-            <div className="max-h-60 overflow-y-auto">
-              {filteredDurations.map((dur) => (
-                <div
-                  key={dur}
-                  className="p-2 hover:bg-gray-100 cursor-pointer"
-                  onClick={() => {
-                    setSelectedDurations(
-                      selectedDurations.includes(dur)
-                        ? selectedDurations.filter((d) => d !== dur)
-                        : [...selectedDurations, dur]
-                    );
-                  }}
-                >
-                  <input
-                    type="checkbox"
-                    checked={selectedDurations.includes(dur)}
-                    onChange={() => {}}
-                    className="mr-2"
-                  />
-                  {capitalize(dur)}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* Format */}
-      <div ref={formatDropdownRef} className="relative">
-        <button
-          className=" cursor-pointer rounded-lg text-sm px-4 py-2 border border-blue-950/30 transition-all bg-white hover:bg-blue-50 w-full text-left flex items-center justify-between"
-          onClick={() => setIsFormatDropdownOpen(!isFormatDropdownOpen)}
-        >
-          <span className="flex items-center gap-2">
-            <DeviceTabletIcon className="w-5 h-5 text-custom-blue-900" />
-            Format
-          </span>
-          <span className="truncate ml-2">
-            {selectedFormats.length > 0
-              ? `${selectedFormats.length} sélectionné(s)`
-              : ""}
-          </span>
-          <Chevron open={isFormatDropdownOpen} />
-        </button>
-        {isFormatDropdownOpen && (
-          <div className="absolute z-10 mt-1 w-64 bg-white border rounded-lg shadow-lg">
-            <div className="max-h-60 overflow-y-auto">
-              {filteredFormats.map((fmt) => (
-                <div
-                  key={fmt}
-                  className="p-2 hover:bg-white cursor-pointer"
-                  onClick={() => {
-                    setSelectedFormats(
-                      selectedFormats.includes(fmt)
-                        ? selectedFormats.filter((f) => f !== fmt)
-                        : [...selectedFormats, fmt]
-                    );
-                  }}
-                >
-                  <input
-                    type="checkbox"
-                    checked={selectedFormats.includes(fmt)}
-                    onChange={() => {}}
-                    className="mr-2"
-                  />
-                  {capitalize(fmt)}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

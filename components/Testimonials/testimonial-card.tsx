@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Card from "../UI/Card/Card";
 
 export type Testimonial = {
   school: string;
@@ -15,10 +14,9 @@ export default function TestimonialCard({
   testimonial: Testimonial;
 }) {
   return (
-    <Card
-      backgroundType="blue"
-      borderType="white"
-      className="flex flex-col gap-8 text-white p-8 md:p-8"
+    <div
+      className="flex bg-custom-blue-700
+     rounded-3xl shadow-[inset_0_0_10px_0_rgba(255,255,255,0.1)] flex-col gap-8 text-white p-8 md:p-8"
     >
       <Image
         src={testimonial.logoUrl}
@@ -33,6 +31,6 @@ export default function TestimonialCard({
       <p className=" font-work-sans font-medium opacity-90 text-[16px] tracking-tight text-white">
         {testimonial.name} - {testimonial.job}
       </p>
-    </Card>
+    </div>
   );
 }

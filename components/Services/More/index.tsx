@@ -1,91 +1,105 @@
 import Button from "@/components/UI/button";
 import Card from "@/components/UI/Card/Card";
 import Image from "next/image";
-import DomainSlider from "../More/domain-slider";
 
-export default function More() {
+export default function MoreServices() {
   return (
-    <section>
-      <h2 className=" text-h2  text-white">Mais aussi...</h2>
-      <div className="grid grid-cols-1 md:grid-cols-10 gap-x-6 gap-y-6">
-        {/* Ligne 1 */}
-        <div className="md:col-span-4">
-          <Card backgroundType="blue" className="h-[300px] justify-end">
-            <h3 className="font-work-sans text-white font-semibold">
-              Création de modules e-learning
-            </h3>
-            <div className="relative z-20">
-              <Button variant="secondary" className="w-full">
-                Contactez-nous
-              </Button>
-            </div>
-          </Card>
+    <section className="p-4 md:p-8 lg:p-16 bg-custom-blue-800 rounded-3xl">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8 auto-rows-[220px]">
+        <div className="md:col-span-2 items-start lg:col-span-1 bg-white rounded-3xl flex flex-col gap-6 p-6 md:p-8 shadow-[0_0_10px_1px_rgba(255,255,255,0.2)]">
+          <Image
+            src="/services/desktop.svg"
+            alt="Création de module e-learning"
+            width={50}
+            height={51}
+            className="h-10 w-auto"
+          />
+          <h3 className="text-custom-blue-900/80 font-manrope font-medium text-base md:text-lg lg:text-xl tracking-[-1px]">
+            Création de module e-learning
+          </h3>
         </div>
-        <div className="md:col-span-6">
-          <Card
-            className="relative h-[300px] justify-end"
-            backgroundType="radial"
-            borderType="gradient"
-          >
-            <Image
-              className="absolute top-0 left-1/2 -translate-x-1/2"
-              width={400}
-              height={400}
-              src="/assets/circle.png"
-              alt="image"
-            />
-            <h3 className="font-work-sans text-white font-semibold mt-14">
-              On crée votre programme sur mesure
-            </h3>
-            <div className="relative z-20">
-              <Button variant="secondary" className="w-full">
-                Prendre un RDV
-              </Button>
-            </div>
-          </Card>
-        </div>
-        {/* Ligne 2 */}
-        <div className="md:col-span-6">
-          <Card
-            backgroundType="radial"
-            borderType="gradient"
-            className="relative h-[300px] p-0 md:p-0"
-          >
-            <DomainSlider />
-          </Card>
-        </div>
-        <div className="md:col-span-4">
-          <Card
-            backgroundType="blue"
-            borderType="white"
-            className="h-[300px] justify-end"
-          >
-            <Image
-              src="/svg/dot-circle.svg"
-              alt="Domain slider"
-              width={1000}
-              height={1000}
-              className="absolute top-0 left-0 w-full h-full object-cover pointer-events-none"
-            />
-            <div className="flex flex-col gap-4">
-              <h3 className="text-[16px] font-work-sans text-white font-semibold">
-                Automatisation de votre organisme
-              </h3>
-              <h3 className="text-[16px] font-work-sans text-white font-semibold">
-                Gestion de la planification
-              </h3>
-              <h3 className="text-[16px] font-work-sans text-white font-semibold">
-                Création des syllabus
-              </h3>
-            </div>
 
-            <div className="relative z-20">
-              <Button variant="secondary" className="w-full">
-                Contactez-nous
-              </Button>
-            </div>
-          </Card>
+        <Card
+          backgroundType="radial"
+          borderType="white"
+          className="md:col-span-2 items-start lg:col-span-1 flex flex-col gap-6 p-6 md:p-8 h-full shadow-[0_0_10px_1px_rgba(255,255,255,0.2)]"
+        >
+          <Image
+            src="/services/planning.svg"
+            alt="Gestion de la planification"
+            width={50}
+            height={51}
+            className="h-10 w-auto"
+          />
+          <h3 className="text-white opacity-80 font-manrope font-medium text-base md:text-lg lg:text-xl tracking-[-1px]">
+            Gestion de la planification
+          </h3>
+        </Card>
+
+        <div className="col-span-1 items-start md:col-span-2 lg:col-span-2 bg-white rounded-3xl flex flex-col gap-6 p-6 md:p-8 h-full shadow-[0_0_10px_1px_rgba(255,255,255,0.2)]">
+          <Image
+            src="/services/cube.svg"
+            alt="Programme sur mesure"
+            width={50}
+            height={51}
+            className="h-10 w-auto"
+          />
+          <h3 className="text-custom-blue-900/80 font-manrope font-medium text-base md:text-lg lg:text-xl tracking-[-1px]">
+            On crée votre programme sur mesure
+          </h3>
         </div>
+
+        <Card
+          backgroundType="radial"
+          borderType="white"
+          className="md:col-span-2 items-start lg:col-span-2 flex flex-col gap-6 p-6 md:p-8 h-full shadow-[0_0_10px_1px_rgba(255,255,255,0.2)]"
+        >
+          <Image
+            src="/services/person.svg"
+            alt="Expert correspondant"
+            width={50}
+            height={51}
+            className="h-10 w-auto"
+          />
+          <h3 className="text-white opacity-80 font-manrope font-medium text-base md:text-lg lg:text-xl tracking-[-1px]">
+            On trouve l&apos;expert qui vous corresponds
+          </h3>
+        </Card>
+
+        <div className="md:col-span-2 items-start lg:col-span-1 bg-white rounded-3xl flex flex-col gap-6 p-6 md:p-8 h-full shadow-[0_0_10px_1px_rgba(255,255,255,0.2)]">
+          <Image
+            src="/services/page.svg"
+            alt="Création des syllabuses"
+            width={50}
+            height={51}
+            className="h-10 w-auto"
+          />
+          <h3 className="text-custom-blue-900/80 font-manrope font-medium text-base md:text-lg lg:text-xl tracking-[-1px]">
+            Création des syllabuses
+          </h3>
+        </div>
+
+        <Card
+          backgroundType="radial"
+          borderType="white"
+          className="md:col-span-2 items-start lg:col-span-1 flex flex-col gap-6 p-6 md:p-8 h-full shadow-[0_0_10px_1px_rgba(255,255,255,0.2)]"
+        >
+          <Image
+            src="/services/cycle.svg"
+            alt="Automatisation de l'organisme"
+            width={50}
+            height={51}
+            className="h-10 w-auto"
+          />
+          <h3 className="text-white opacity-80 font-manrope font-medium text-base md:text-lg lg:text-xl tracking-[-1px]">
+            Automatisation de votre organisme
+          </h3>
+        </Card>
+      </div>
+      <div className="relative z-20 w-fit ml-auto">
+        <Button variant="secondary" className="w-full mt-8">
+          Contactez-nous
+        </Button>
       </div>
     </section>
   );
