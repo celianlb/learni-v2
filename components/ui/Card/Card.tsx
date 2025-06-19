@@ -5,7 +5,7 @@ import "./card.css";
 type BorderType = "gradient" | "white";
 type BackgroundType = "blue" | "radial" | "linear" | "light" | "white";
 
-export default function Card({
+function Card({
   children,
   className,
   borderType = "white",
@@ -46,3 +46,6 @@ export default function Card({
 
   return cardContent;
 }
+
+export { Card };
+export default Card;

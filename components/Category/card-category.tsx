@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import "../ui/Card/card.css";
+import "../UI/Card/card.css";
 
 export default function CardCategory({
   children,

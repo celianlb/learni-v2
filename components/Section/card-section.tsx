@@ -1,4 +1,4 @@
-export default function CardSection({
+function CardSection({
   children,
   className,
   ref,
@@ -16,3 +16,6 @@ export default function CardSection({
     </section>
   );
 }
+
+export { CardSection };
+export default CardSection;
